@@ -1,17 +1,10 @@
 package com.epam;
 
-import com.epam.steps.BaseSteps;
 import com.epam.steps.GoogleSteps;
-import com.epam.webdriver.WebDriverFactory;
 import com.epam.webdriver.WebDriverType;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;

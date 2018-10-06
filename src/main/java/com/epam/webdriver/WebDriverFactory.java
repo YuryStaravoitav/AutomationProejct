@@ -17,7 +17,6 @@ public enum WebDriverFactory {
 
     public WebDriver getInstance(WebDriverType webDriverType) {
         if (webDriver == null) {
-
             switch (webDriverType) {
                 case CHROME:
                     WebDriverManager.chromedriver().setup();
@@ -28,7 +27,9 @@ public enum WebDriverFactory {
                     webDriver = new FirefoxDriver();
                     break;
             }
+            webDriver.manage().window().maximize();
         }
+
         return webDriver;
     }
 
