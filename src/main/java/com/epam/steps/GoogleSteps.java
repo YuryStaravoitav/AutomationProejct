@@ -12,6 +12,10 @@ public class GoogleSteps extends BaseSteps {
 
     private final GooglePage googlePage;
 
+    private GoogleSteps() {
+        googlePage = null;
+    }
+
     public GoogleSteps(WebDriverType webDriverType) {
         googlePage = PageFactory.initElements(WebDriverFactory.INSTANCE.getInstance(webDriverType), GooglePage.class);
     }
