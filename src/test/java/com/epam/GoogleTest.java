@@ -1,5 +1,7 @@
 package com.epam;
 
+import com.epam.steps.BaseSteps;
+import com.epam.steps.GoogleSteps;
 import com.epam.webdriver.WebDriverFactory;
 import com.epam.webdriver.WebDriverType;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -19,28 +21,20 @@ import static org.hamcrest.Matchers.containsString;
 @Story("Validate EPAM in Google search results")
 class GoogleTest {
 
-    private static WebDriver webDriver;
-
-    @BeforeAll
-    static void beforeAll() {
-        WebDriverManager.chromedriver().setup();
-        webDriver = WebDriverFactory.INSTANCE.getInstance(WebDriverType.CHROME);
-    }
+    private static GoogleSteps googleSteps = new GoogleSteps(WebDriverType.CHROME);
 
     @Test
     @Severity(SeverityLevel.BLOCKER)
-    @Description("Validate that ")
+    @Description("Validate that EPAM string contains in all search result titles")
     void searchEpamInGoogleTest() {
         String searchString = "EPAM";
-        webDriver.get("https://google.com");
-        webDriver.findElement(By.name("q")).sendKeys(searchString);
-        webDriver.findElement(By.name("q")).sendKeys(Keys.ENTER);
-        webDriver.findElements(By.cssSelector(".LC20lb")).
-                forEach(webElement -> assertThat(webElement.getText().toLowerCase(), containsString(searchString.toLowerCase())));
+        googleSteps.openSearchPage();
+        googleSteps.search(searchString);
+        googleSteps.getTitles().forEach(title -> assertThat(title.toLowerCase(), containsString(searchString.toLowerCase())));
     }
 
     @AfterAll
     static void afterAll() {
-        webDriver.quit();
+        googleSteps.close();
     }
 }

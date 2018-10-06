@@ -1,5 +1,6 @@
 package com.epam.webdriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -8,17 +9,30 @@ public enum WebDriverFactory {
 
     INSTANCE;
 
+    private WebDriver webDriver;
+
     WebDriverFactory() {
 
     }
 
     public WebDriver getInstance(WebDriverType webDriverType) {
-        switch (webDriverType) {
-            case CHROME:
-                return new ChromeDriver();
-            case FIREFOX:
-                return new FirefoxDriver();
+        if (webDriver == null) {
+
+            switch (webDriverType) {
+                case CHROME:
+                    WebDriverManager.chromedriver().setup();
+                    webDriver = new ChromeDriver();
+                    break;
+                case FIREFOX:
+                    WebDriverManager.firefoxdriver().setup();
+                    webDriver = new FirefoxDriver();
+                    break;
+            }
         }
-        return null;
+        return webDriver;
+    }
+
+    public WebDriver getWebDriver() {
+        return webDriver;
     }
 }
