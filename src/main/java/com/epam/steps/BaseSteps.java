@@ -7,6 +7,6 @@ public class BaseSteps {
 
     @Step("Close WebDriver")
     public void close() {
-        WebDriverFactory.INSTANCE.getWebDriver().close();
+        WebDriverFactory.INSTANCE.close();
     }
 }

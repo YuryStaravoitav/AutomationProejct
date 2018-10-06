@@ -33,6 +33,11 @@ public enum WebDriverFactory {
         return webDriver;
     }
 
+    public void close() {
+        webDriver.close();
+        webDriver = null;
+    }
+
     public WebDriver getWebDriver() {
         return webDriver;
     }
